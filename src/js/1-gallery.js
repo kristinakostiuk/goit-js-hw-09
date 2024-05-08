@@ -71,11 +71,3 @@ import SimpleLightbox from "simplelightbox";
 	captionsData: 'alt',
 	captionDelay: 250,
     });
-
-    lightbox.on('shown.simplelightbox', function () {
-	const buttons = document.querySelectorAll('button');
-	buttons.forEach(value => (value.style.color = 'white'));
-	
-	const counter = document.querySelector('.sl-counter');
-	counter.style.color = 'white';
-});

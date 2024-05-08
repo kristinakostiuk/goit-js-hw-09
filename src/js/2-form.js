@@ -12,7 +12,7 @@ let formData = {
 populateFormFields();
 
 formRefs.form.addEventListener("submit", onFormSubmit);
-formRefs.form.addEventListener("input", onInputChange);
+formRefs.form.addEventListener("input", handleInput);
 
 function onFormSubmit(event) {
     event.preventDefault();
@@ -26,7 +26,7 @@ function onFormSubmit(event) {
     clearLocalStorageAndForm();
 }
 
-function onInputChange(event) {
+function handleInput(event) {
     const fieldName = event.target.name;
     const fieldValue = event.target.value.trim();
     formData[fieldName] = fieldValue;
@@ -37,10 +37,14 @@ function populateFormFields() {
     const savedFormData = loadFormDataFromLocalStorage();
 
     if (savedFormData) {
-        Object.keys(savedFormData).forEach(fieldName => {
-            formRefs[fieldName].value = savedFormData[fieldName];
-            formData[fieldName] = savedFormData[fieldName];
-        });
+        if (formRefs.input) {
+            formRefs.input.value = savedFormData.email;
+            formData.email = savedFormData.email;
+        }
+        if (formRefs.message) {
+            formRefs.message.value = savedFormData.message;
+            formData.message = savedFormData.message;
+        }
     }
 }
 
